@@ -19,6 +19,10 @@
     {
       "name": "Orders",
       "description": "Everything about Orders"
+    },
+    {
+      "name": "Carts",
+      "description": "Everything about Orders"
     }
   ],
   "schemes": [
@@ -62,7 +66,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful",
+            "description": "Everything worked as expected.",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -99,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful",
+            "description": "Everything worked as expected.",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -136,7 +140,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful",
+            "description": "Everything worked as expected.",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -180,10 +184,439 @@
         ],
         "responses": {
           "200": {
-            "description": "successful",
+            "description": "Everything worked as expected.",
             "schema": {
               "$ref": "#/definitions/Varient"
             }
+          }
+        }
+      }
+    },
+    "/carts": {
+      "get": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "List all carts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          }
+        }
+      }
+    },
+    "/carts/{cart_id}": {
+      "post": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "ID of the cart you'd like to use",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "cart_id",
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "prod_R4OANwRqklvYL8"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "example": 5
+                },
+                "variant_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "Update cart",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "cart_id",
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "prod_R4OANwRqklvYL8"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "example": 5
+                },
+                "variant_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "Update cart",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      }
+    },
+    "/carts/{cart_id}/items/{line_item_id}": {
+      "put": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "ID of the cart you'd like to use",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "line_item_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "cart_id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "example": 5
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "Update cart",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "line_item_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      }
+    },
+    "/v1/carts/{cart_id}/items": {
+      "delete": {
+        "tags": [
+          "Carts"
+        ],
+        "summary": "Update cart",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cart_id",
+            "type": "string",
+            "description": "The id of cart Id.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected.",
+            "schema": {
+              "$ref": "#/definitions/CartDetail"
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "List all products",
+        "description": "Returns a list of orders for your merchant's account. You can optionally provide pagination filters, and a free-text query filter to narrow down to specific search results.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "description": "The numbers of items to return.",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "description": "The number of page.",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected."
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get order",
+        "description": "Returns a specific order from your merchant account.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "order_id",
+            "type": "integer",
+            "description": "The numbers of items to return.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Updates parts of an existing order: customer information, shipping or billing addresses, extra fields, and conditionals. You cannot update any financial information for an existing order.",
+        "summary": "Update order",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "order_id",
+            "type": "integer",
+            "description": "The numbers of items to return.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected."
           }
         }
       }
@@ -262,10 +695,190 @@
           }
         }
       }
+    },
+    "Cart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "cart_2Jwr9yJAeN4VlP"
+        },
+        "created": {
+          "type": "number",
+          "example": 1479424851
+        },
+        "last_updated": {
+          "type": "number",
+          "example": 1479424851
+        },
+        "expires": {
+          "type": "number",
+          "example": 1482016851
+        },
+        "total_items": {
+          "type": "integer",
+          "example": 0
+        },
+        "total_unique_items": {
+          "type": "integer",
+          "example": 0
+        },
+        "subtotal": {
+          "type": "object",
+          "properties": {
+            "raw": {
+              "type": "number",
+              "example": 19.95
+            },
+            "formatted": {
+              "type": "string",
+              "example": 19.95
+            },
+            "formatted_with_symbol": {
+              "type": "string",
+              "example": "$19.95"
+            },
+            "formatted_with_code": {
+              "type": "string",
+              "example": "19.95 USD"
+            }
+          }
+        },
+        "currency": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "example": "USD"
+            },
+            "symbol": {
+              "type": "string",
+              "example": "$"
+            }
+          }
+        },
+        "hosted_checkout_url": {
+          "type": "string",
+          "example": "https://checkout.chec.io/cart/cart_2Jwr9yJAeN4VlP"
+        }
+      }
+    },
+    "CartDetail": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string",
+          "example": true
+        },
+        "event": {
+          "type": "string",
+          "example": "Cart.Item.Added"
+        },
+        "line_item_id": {
+          "type": "string",
+          "example": "item_1ypbroE658n4ea"
+        },
+        "product_id": {
+          "type": "string",
+          "example": "prod_4VPvL5zRQ5AQkX"
+        },
+        "product_name": {
+          "type": "string",
+          "example": "New season T-shirt"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 5
+        },
+        "line_total": {
+          "type": "object",
+          "properties": {
+            "raw": {
+              "type": "number",
+              "example": 80
+            },
+            "formatted": {
+              "type": "string",
+              "example": 80
+            },
+            "formatted_with_symbol": {
+              "type": "string",
+              "example": "$80.00"
+            },
+            "formatted_with_code": {
+              "type": "string",
+              "example": "80.00 USD"
+            }
+          }
+        },
+        "Cart": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "cart_2Jwr9yJAeN4VlP"
+            },
+            "created": {
+              "type": "number",
+              "example": 1479424851
+            },
+            "last_updated": {
+              "type": "number",
+              "example": 1479424851
+            },
+            "expires": {
+              "type": "number",
+              "example": 1482016851
+            },
+            "total_items": {
+              "type": "integer",
+              "example": 0
+            },
+            "total_unique_items": {
+              "type": "integer",
+              "example": 0
+            },
+            "subtotal": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "number",
+                  "example": 19.95
+                },
+                "formatted": {
+                  "type": "string",
+                  "example": 19.95
+                },
+                "formatted_with_symbol": {
+                  "type": "string",
+                  "example": "$19.95"
+                },
+                "formatted_with_code": {
+                  "type": "string",
+                  "example": "19.95 USD"
+                }
+              }
+            },
+            "currency": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "USD"
+                },
+                "symbol": {
+                  "type": "string",
+                  "example": "$"
+                }
+              }
+            },
+            "hosted_checkout_url": {
+              "type": "string",
+              "example": "https://checkout.chec.io/cart/cart_2Jwr9yJAeN4VlP"
+            }
+          }
+        }
+      }
     }
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
   }
 }
